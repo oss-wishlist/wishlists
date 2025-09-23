@@ -1,4 +1,4 @@
-name: Add Issues to Project
+name: Add Wishes to Project
 
 on:
   issues:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add issue to project
-        uses: actions/add-to-project@v0.5.0
+        uses: actions/add-wishes-to-project@v0.5.0
         with:
           # Your OSS Wish List project URL
           project-url: https://github.com/orgs/oss-wish-list/projects/1
