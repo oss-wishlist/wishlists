@@ -1,6 +1,5 @@
 name: OSS Wishlist Request
 description: Submit a request for open source project support
-title: "[Wishlist] "
 labels: ["wishlist"]
 assignees: []
 body:
