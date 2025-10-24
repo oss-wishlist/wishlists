@@ -15,6 +15,6 @@ jobs:
       
     steps:
       - name: Manage FUNDING.yml
-        uses: oss-wishlist/manage-funding-yml@v1
+        uses: oss-wishlist/manage-wishlist-actions@v1
         with:
           github-token: ${{ secrets.WISHLIST_BOT_TOKEN }}
