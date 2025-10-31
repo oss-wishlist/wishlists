@@ -1,0 +1,33 @@
+# Workflow template for oss-wishlist/wishlists repository
+# Copy this to: .github/workflows/manage-wishlist-actions.yml
+
+name: Manage Wishlist Actions
+
+on:
+  issues:
+    # Run only when labels change to reduce duplicate triggers
+    types: [labeled]
+
+jobs:
+  manage-wishlist:
+    concurrency:
+      group: manage-wishlist-${{ github.event.issue.number }}
+      cancel-in-progress: true
+    # Only run for issues that have been approved
+    if: contains(github.event.issue.labels.*.name, 'approved-wishlist')
+    runs-on: ubuntu-latest
+    
+    permissions:
+      issues: write        # To add labels and comments to wishlists issues
+      contents: read       # To read repository content
+      
+    steps:
+      - name: Manage Wishlist Actions
+        uses: oss-wishlist/manage-wishlist-actions@v1
+        with:
+          # IMPORTANT: Use a PAT with 'public_repo' scope stored in secrets
+          # The default GITHUB_TOKEN cannot create PRs in other repositories
+          github-token: ${{ secrets.WISHLIST_BOT_TOKEN }}
+          # Optional: URL to refresh wishlist cache after PR creation
+          # Default is staging URL, change to production when ready
+          cache-url: 'https://urchin-app-bozjb.ondigitalocean.app/api/wishlists?refresh=true'
